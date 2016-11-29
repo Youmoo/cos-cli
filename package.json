@@ -1,0 +1,29 @@
+{
+  "name": "cos-cli",
+  "version": "0.0.1",
+  "description": "cos-cli",
+  "main": "index.js",
+  "bin": {
+    "cos": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cos",
+    "cos-cli"
+  ],
+  "author": "Youmoo <youmoo@vellichor.me> (https://promise.rocks)",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "qos-node-client": "0.0.3"
+  },
+  "files": [
+    "index.js",
+    "commands",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ]
+}
