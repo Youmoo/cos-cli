@@ -16,17 +16,23 @@ module.exports = function upload(program, client) {
     .action((file, cmd) => {
       let {overwrite, path:fileId}=cmd;
 
+      const filename = path.basename(file);
+
       if (!fileId) {
-        fileId = '/' + path.basename(file);
+        fileId = '/' + filename;
       }
       if (!fileId.startsWith('/')) {
         fileId = '/' + fileId;
       }
+      if (fileId.endsWith('/')) {
+        fileId += filename;
+      }
       if (!file.startsWith('/')) {
         file = process.cwd() + '/' + file;
       }
+
       console.log('uploading file: ', file);
-      client.uploadLargeFile({localFile: file, fileId, form: {insertOnly: overwrite && 1}})
+      client.uploadLargeFile({localFile: file, fileId, form: {insertOnly: overwrite ? 0 : 1}})
         .then((json) => {
           console.log('上传成功', json);
         })
