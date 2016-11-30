@@ -7,7 +7,6 @@ const path = require('path');
 
 module.exports = function upload(program, client) {
   program
-    .version('0.0.1')
     .command('upload <file>')
     .alias('up')
     .description('upload files')
