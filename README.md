@@ -38,6 +38,9 @@ cos upload hello.txt --path /hello.log
 # 上传文件，覆盖同名的文件
 cos upload hello.txt --path /hello.log --overwrite
 
+# 上传文件，上传完成后删除本地文件
+cos upload hello.txt --path /hello.log --delete
+
 # 删除cdn上的文件
 cos rm /hello.lg
 

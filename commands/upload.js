@@ -4,6 +4,7 @@
  */
 'use strict';
 const path = require('path');
+const fs = require('fs');
 
 module.exports = function upload(program, client) {
   program
@@ -13,8 +14,9 @@ module.exports = function upload(program, client) {
     .option('-O, --overwrite', 'Wether to overwrite existing files')
     .option('-P, --path [fileId]', 'Specify fileId')
     .option('-B, --bucket [bucket]', 'Specify bucket')
+    .option('-D, --delete', 'Delete local file after uploading is done')
     .action((file, cmd) => {
-      let {overwrite, path:fileId}=cmd;
+      let {overwrite, path:fileId, delete:del}=cmd;
 
       const filename = path.basename(file);
 
@@ -35,6 +37,7 @@ module.exports = function upload(program, client) {
       client.uploadLargeFile({localFile: file, fileId, form: {insertOnly: overwrite ? 0 : 1}})
         .then((json) => {
           console.log('上传成功', json);
+          del && fs.unlinkSync(file);
         })
         .catch((json) => {
           console.warn('上传失败', json);
